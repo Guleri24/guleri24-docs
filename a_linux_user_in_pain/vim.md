@@ -4,7 +4,9 @@ parent: A Linux User In Pain
 has_children: false
 nav_order: 1
 ---
+Date: 10 Oct 2021
 
+# Vim - A heaven grade text editor
 Don't afraid form Vim. When got grasp of some basic command of the vim then you feel like why I was afraid of vim.
 Vim is like a tool form heaven.
 
