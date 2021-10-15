@@ -1,0 +1,11 @@
+I"Ê<p>Date: 10 Oct 2021</p>
+
+<h1 id="setup">Setup</h1>
+<p>You have to find the way to install <code class="language-plaintext highlighter-rouge">sway</code>.</p>
+
+<p>In Fedora:
+<code class="language-plaintext highlighter-rouge">sudo dnf install sway </code></p>
+
+<p>But you can try typing <code class="language-plaintext highlighter-rouge">sway</code> in terminal it may display the <code class="language-plaintext highlighter-rouge">sway</code> packages.</p>
+
+:ET

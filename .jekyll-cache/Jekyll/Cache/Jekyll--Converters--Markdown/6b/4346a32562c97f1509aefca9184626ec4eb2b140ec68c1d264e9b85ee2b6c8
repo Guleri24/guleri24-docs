@@ -1,0 +1,144 @@
+I" <<p>Date: 15 Oct 2021</p>
+
+<h1 id="circular-buffer">Circular Buffer</h1>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    
+<span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.atomic.AtomicInteger</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CircularBuffer</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kt">char</span><span class="o">[]</span> <span class="n">buffer</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="kt">int</span> <span class="n">bufferSize</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">writeIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">readIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="nc">AtomicInteger</span> <span class="n">readableData</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AtomicInteger</span><span class="o">(</span><span class="mi">0</span><span class="o">);</span>
+    
+    <span class="kd">public</span> <span class="nf">CircularBuffer</span><span class="o">(</span><span class="kt">int</span> <span class="n">bufferSize</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">isPowerOfTwo</span><span class="o">(</span><span class="n">bufferSize</span><span class="o">))</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">IllegalArgumentException</span><span class="o">();</span>
+        <span class="o">}</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">bufferSize</span> <span class="o">=</span> <span class="n">bufferSize</span><span class="o">;</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="o">[</span><span class="n">bufferSize</span><span class="o">];</span>
+    <span class="o">}</span>
+    
+    <span class="cm">/**
+     * Example: i = 4
+     *  binary of i = 100
+     *  binary of i - 1 = 011  {i.e. 3}
+     *
+     * i &amp; i - 1
+     * And operation: if both `1` then 1 else 0
+     *    100
+     *  &amp; 011  
+     *   -----
+     *    000
+     * As 000 == 0. So, i is a power of two ;-)
+     */</span>
+          
+    <span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">isPowerOfTwo</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="o">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="o">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">==</span> <span class="mi">0</span><span class="o">;</span> 
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">getTrueIndex</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">i</span> <span class="mi">5</span> <span class="n">bufferSize</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">public</span> <span class="nc">Character</span> <span class="nf">readOutChar</span><span class="o">()</span> <span class="o">{</span>
+        <span class="nc">Character</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    
+        <span class="c1">// if we have data to read</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">readableData</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="nc">Character</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">buffer</span><span class="o">[</span><span class="n">getTrueIndex</span><span class="o">(</span><span class="n">readIndex</span><span class="o">)]);</span>
+            <span class="n">readableData</span><span class="o">.</span><span class="na">decrementAndGet</span><span class="o">();</span>
+            <span class="n">readIndex</span><span class="o">++;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="n">publc</span> <span class="kt">boolean</span> <span class="nf">writeToCharBuffer</span><span class="o">(</span><span class="kt">char</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">boolean</span> <span class="n">result</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+        
+        <span class="c1">// if we can write ti the buffer</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">readableData</span><span class="o">.</span><span class="na">get</span><span class="o">()</span> <span class="o">&lt;</span>  <span class="n">bufferSize</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">buffer</span><span class="o">[</span><span class="n">getTrueIndex</span><span class="o">(</span><span class="n">writeIndex</span><span class="o">)]</span> <span class="o">=</span> <span class="n">c</span><span class="o">;</span>
+            <span class="n">readableData</span><span class="o">.</span><span class="na">incrementAndGet</span><span class="o">();</span>
+            <span class="n">writeIndex</span><span class="o">++;</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">TestWriterWorker</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
+        <span class="nc">String</span> <span class="n">alpahbet</span> <span class="o">=</span> <span class="s">"abcdefghijklmnpqrstuvwxyz0123456789"</span><span class="o">;</span>
+        <span class="nc">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Random</span><span class="o">();</span>
+        <span class="nc">CircularBuffer</span> <span class="n">buffer</span><span class="o">;</span>
+        
+        <span class="kd">public</span> <span class="nf">TeztWriteWorker</span><span class="o">(</span><span class="nc">CircularBuffer</span> <span class="n">cb</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">buffer</span> <span class="o">=</span> <span class="n">cb</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="kd">private</span> <span class="kt">char</span> <span class="nf">getRandomChar</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">alphabet</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">random</span><span class="o">.</span><span class="na">nextInt</span><span class="o">(</span><span class="n">alphabet</span><span class="o">.</span><span class="na">length</span><span class="o">()));</span>
+        <span class="o">}</span>
+        
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="nc">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">())</span> <span class="o">{</span>
+                <span class="k">if</span> <span class="o">(!</span><span class="n">buffer</span><span class="o">.</span><span class="na">writeToCharBuffer</span><span class="o">(</span><span class="n">getRandomChar</span><span class="o">()))</span> <span class="o">{</span>   
+                    <span class="nc">Thread</span><span class="o">.</span><span class="na">yield</span><span class="o">();</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="k">return</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+    
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">TestReadWorker</span> <span class="kd">implements</span> <span class="nc">Runnable</span> <span class="o">{</span>
+        <span class="nc">CircularBuffer</span> <span class="n">buffer</span><span class="o">;</span>
+            
+        <span class="kd">public</span> <span class="nf">TestReadWorker</span><span class="o">(</span><span class="nc">CircularBuffer</span> <span class="n">cb</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">this</span><span class="o">.</span><span class="na">buffer</span> <span class="o">=</span> <span class="n">cb</span><span class="o">;</span>
+        <span class="o">}</span>
+            
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Printing Buffer:"</span><span class="o">)</span><span class="err">'</span>
+            <span class="k">while</span> <span class="o">(!</span><span class="nc">Thread</span><span class="o">.</span><span class="na">interrupted</span><span class="o">())</span> <span class="o">{</span>
+                <span class="nc">Character</span> <span class="n">c</span> <span class="o">=</span> <span class="n">buffer</span><span class="o">.</span><span class="na">readOutChar</span><span class="o">());</span>
+                <span class="k">if</span> <span class="o">(</span><span class="n">c</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">print</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">charValue</span><span class="o">());</span>
+                <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                    <span class="nc">Thread</span><span class="o">.</span><span class="na">yield</span><span class="o">();</span>
+                    <span class="k">try</span> <span class="o">{</span>
+                        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">10</span><span class="o">);</span>
+                    <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="nc">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">();</span>
+                        <span class="k">return</span><span class="o">;</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>    
+   <span class="o">}</span>
+        
+   <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">InterruptedException</span> <span class="o">{</span>
+        <span class="kt">int</span> <span class="n">bufferSize</span> <span class="o">=</span> <span class="mi">1024</span><span class="o">;</span>
+            
+        <span class="nc">CircularBuffer</span> <span class="n">cb</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">CircularBuffer</span><span class="o">(</span><span class="n">bufferSize</span><span class="o">);</span>
+            
+        <span class="nc">Thread</span> <span class="n">writeThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">TestWriteWorker</span><span class="o">(</span><span class="n">cb</span><span class="o">));</span>
+        <span class="nc">Thread</span> <span class="n">readThread</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Thread</span><span class="o">(</span><span class="k">new</span> <span class="nc">TestReadWorker</span><span class="o">(</span><span class="n">cb</span><span class="o">));</span>
+        <span class="n">readThread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        <span class="n">writeThread</span><span class="o">.</span><span class="na">start</span><span class="o">();</span>
+        
+        <span class="c1">// wait some amount of time</span>
+        <span class="nc">Thread</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="mi">10000</span><span class="o">);</span>
+            
+        <span class="c1">// interrupt threads and exit</span>
+        <span class="n">writeThread</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>
+        <span class="n">readThread</span><span class="o">.</span><span class="na">interrupt</span><span class="o">();</span>       
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+:ET

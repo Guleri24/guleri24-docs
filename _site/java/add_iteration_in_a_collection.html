@@ -1,0 +1,31 @@
+<p>Date: 14 Oct 2021</p>
+
+<h1 id="to-implement-iteration-in-a-collection">To implement iteration in a collection</h1>
+<ul>
+  <li>
+    <p>Include the following import statement so that our code can refer
+to Java’s <code class="language-plaintext highlighter-rouge">java.util.Iterator</code> interface:</p>
+
+    <p>import java.util.Iterator;</p>
+  </li>
+  <li>
+    <p>Add the following to the class declaration, a promise to provide an
+<code class="language-plaintext highlighter-rouge">iterator()</code> method, as specified in the <code class="language-plaintext highlighter-rouge">java.util.Iterable</code> interface:</p>
+
+    <p>implements Iterable<Item></Item></p>
+
+    <p>e.g public class Bag<Element> implements Iterable<Element> { }</Element></Element></p>
+  </li>
+  <li>
+    <p>Implement a method <code class="language-plaintext highlighter-rouge">iterator()</code> that returns an object from a class 
+that implements the <code class="language-plaintext highlighter-rouge">Iterator</code> interface:</p>
+
+    <p>public Iterator<Item> iterator() {
+      return new LinkedIterator();
+  }</Item></p>
+  </li>
+  <li>
+    <p>Implement a nested class that implements the <code class="language-plaintext highlighter-rouge">Iterator</code> interface
+by including the methods <code class="language-plaintext highlighter-rouge">hasNext()</code>, <code class="language-plaintext highlighter-rouge">next()</code>, and <code class="language-plaintext highlighter-rouge">remove()</code>.</p>
+  </li>
+</ul>

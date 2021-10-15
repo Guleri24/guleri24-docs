@@ -1,0 +1,119 @@
+I"=.<h1 id="bags">Bags</h1>
+<p>Collection which does not allow removing elements (only collect and iterate)</p>
+
+<p>public class Bag<Item> implements Iterable<Item>
+             Bag()                create an empty bag
+        void add(Item item)       add an item
+     boolean isEmpty()            is the bag empty?
+         int size()               number of items in the bag</Item></Item></p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kn">import</span> <span class="nn">java.util.Iterator</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.NoSuchElementException</span><span class="o">;</span>
+
+<span class="cm">/**
+ * @param &lt;Element&gt; -  the generic type of an element in this bag
+ *
+ */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Bag</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Iterable</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="o">{</span>
+    
+    <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">firstElement</span><span class="o">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">size</span><span class="o">;</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="nc">Element</span> <span class="n">content</span><span class="o">;</span>
+        <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">nextElement</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="cm">/** Create and empty bag */</span>
+    <span class="kd">public</span> <span class="nf">Bag</span><span class="o">()</span> <span class="o">{</span>
+        <span class="n">firstElement</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** @return true if this bag is empty, false otherwise */</span>
+    <span class="n">pubilc</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">firstElement</span> <span class="o">==</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    
+    <span class="cm">/** @return number of elements */</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">size</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="n">size</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** @param element -  the element to add */</span>
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="o">(</span><span class="nc">Element</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">oldfirst</span> <span class="o">=</span> <span class="n">firstElement</span><span class="o">;</span>
+        <span class="n">firstElement</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Node</span><span class="o">&lt;&gt;();</span>
+        <span class="n">firstElement</span><span class="o">.</span><span class="na">content</span> <span class="o">=</span> <span class="n">element</span><span class="o">;</span>
+        <span class="n">firstElement</span><span class="o">.</span><span class="na">nextElement</span> <span class="o">=</span> <span class="n">oldfirst</span><span class="o">;</span>
+        <span class="n">size</span><span class="o">++;</span>
+    <span class="o">}</span>
+    
+    <span class="cm">/**
+     * Checks if the bag contains a specific element
+     *
+     * @param element which you want to look for
+     * @return true if bag contains element, otherwise false
+     */</span>
+     <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">contains</span><span class="o">(</span><span class="nc">Element</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Iteator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">itr</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">interator</span><span class="o">();</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">itr</span><span class="o">.</span><span class="na">hasNext</span><span class="o">())</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">iter</span><span class="o">.</span><span class="na">next</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">element</span><span class="o">))</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** @return an iterator that iterates over the elements in this bag in arbitatary order */</span>
+    <span class="kd">public</span> <span class="nc">Iteator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="nf">iterator</span><span class="o">()</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">ListIterator</span><span class="o">&lt;&gt;(</span><span class="n">firstElement</span><span class="o">);</span>
+    <span class="o">}</span>
+    
+    <span class="nd">@SuppressWarnings</span><span class="o">(</span><span class="s">"hiding"</span><span class="o">)</span>
+    <span class="kd">private</span> <span class="kd">class</span> <span class="nc">ListIterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="nc">Iterator</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="o">{</span>
+        <span class="kd">private</span> <span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">currentElement</span><span class="o">;</span>
+        
+        <span class="kd">public</span> <span class="nf">ListIterator</span><span class="o">(</span><span class="nc">Node</span><span class="o">&lt;</span><span class="nc">Element</span><span class="o">&gt;</span> <span class="n">firstElement</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">currentElement</span> <span class="o">=</span> <span class="n">firstElement</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasNext</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">return</span> <span class="n">currentElement</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="o">}</span>
+
+        <span class="cm">/** remove is not allowed in a bag */</span>
+        <span class="nd">@Override</span>
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">remove</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nf">UnsupportedOperationException</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="kd">public</span> <span class="nc">Element</span> <span class="nf">next</span><span class="o">()</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(!</span><span class="n">hasNext</span><span class="o">())</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">();</span>
+            <span class="nc">Element</span> <span class="n">element</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="na">content</span><span class="o">;</span>
+            <span class="n">currentElement</span> <span class="o">=</span> <span class="n">currentElement</span><span class="o">.</span><span class="na">nextElement</span><span class="o">;</span>
+            <span class="k">return</span> <span class="n">element</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="cm">/** Driving code: main-method for testing */</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">Bag</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">bag</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Bag</span><span class="o">&lt;&gt;();</span>
+
+        <span class="n">bag</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Java 8"</span><span class="o">);</span>
+        <span class="n">bag</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Java 11"</span><span class="o">);</span>
+        <span class="n">bag</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="s">"Java 17"</span><span class="o">);</span>
+
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"size of bag = "</span> <span class="o">+</span> <span class="n">bag</span><span class="o">.</span><span class="na">size</span><span class="o">());</span>
+        <span class="k">for</span> <span class="o">(</span><span class="nc">Sting</span> <span class="n">s</span> <span class="o">:</span> <span class="n">bag</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">s</span><span class="o">);</span>
+        <span class="o">}</span>
+        
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">bag</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="s">"Java 17"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+</code></pre></div></div>
+
+:ET

@@ -1,0 +1,29 @@
+I"�<p>Date: 10 Oct 2021</p>
+
+<h1 id="swaywm---a-tiling-window-manager">SwayWM - A tiling window manager</h1>
+<p>Sway is a tiling Wayland compositor and a drop-in replacement for the 
+i3 window manager for X11. It works with your existing i3 configuration
+and supports most of i3’s features, plus a few extras.</p>
+
+<p>Sway allows you to arrange your application windows logically, rather 
+than spatially. Windows are arranged into a grid by default which maximizes
+the efficiency of your screen and can be quickly manipulated using only the
+keyboard.</p>
+
+<p>The reason I’m using sway because build from scratch for wayland and low memory
+consumption. 
+And it sounds great “Sway” ;-)</p>
+
+<p>The things to keep in mind while using sway that there is a slight learning 
+curve. Before completly going to <code class="language-plaintext highlighter-rouge">sway</code>, I was using GNOME 40 in fedora.
+While I was enjoying the best in class gestures in GNOME 40 but I was not satisfied.
+I don’t know how to explain it in word but it feels like something is missing.
+So, I decided its the time to shift to Sway. I thought about it when I was using VIM.
+I never considered VIM for a long time but one day I decided to use it. Gg Bois, when I 
+started using it, its like a game changer.</p>
+
+<p>Simply I aim is always to go for the tougher things because from them you learn a lot.</p>
+
+<p>I also tried installing Gentoo ^-^.</p>
+
+:ET
