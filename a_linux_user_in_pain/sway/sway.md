@@ -2,7 +2,7 @@
 title: Sway WM
 parent: A Linux User In Pain
 has_children: true
-nav_order:3
+nav_order: 4
 ---
 Date: 10 Oct 2021
 
