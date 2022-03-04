@@ -2,7 +2,7 @@
 title: Add iteration in a collection
 parent: Java
 has_children: false
-nav_order: 2
+nav_order: 3
 ---
 Date: 14 Oct 2021
 
