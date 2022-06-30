@@ -2,7 +2,7 @@
 title: Java setup with PATH - GraalVM
 parent: A Linux User In Pain
 has_children: false
-nav_order: 3
+nav_order: 4
 ---
 Date: 4 Mar 2022
 
