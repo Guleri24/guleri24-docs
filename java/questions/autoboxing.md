@@ -1,6 +1,7 @@
 ---
 title: Autoboxing
 parent: Questions
+grand_parent: Java
 has_children: true
 nav_order: 1
 ---
