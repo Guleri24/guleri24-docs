@@ -6,5 +6,6 @@ grand_parent: Computer Science
 permalink: /cs/algorithms/binary_search/
 ---
 
-28 Aug 2022
+Date: 28 Aug 2022
+
 # Binary Search

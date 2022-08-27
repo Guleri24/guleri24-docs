@@ -6,7 +6,6 @@ grand_parent: Java
 has_children: false
 nav_order: 1
 permalink: /java/questions/autoboxing/
-
 ---
 Date: 14 Oct 2021
 

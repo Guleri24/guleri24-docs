@@ -1,29 +1,34 @@
-<p><code class="language-plaintext highlighter-rouge">Date: 6 Oct 2021</code></p>
+---
+title: Hyphen vs Underscore in file names
+parent: Try
+has_children: false
+nav_order: 1
+---
+`Date: 6 Oct 2021`
 
-<h1 id="do-you-prefer-to-use---or-_-in-your-file-names">Do you prefer to use <code class="language-plaintext highlighter-rouge">-</code> or <code class="language-plaintext highlighter-rouge">_</code> in your file names?</h1>
-<p><code class="language-plaintext highlighter-rouge">-</code> is quicker to type, but <code class="language-plaintext highlighter-rouge">_</code> looks better imo (plus consistency with names in programming)</p>
+# Do you prefer to use `-` or `_` in your file names?
+`-` is quicker to type, but `_` looks better imo (plus consistency with names in programming)
 
-<p>Use <code class="language-plaintext highlighter-rouge">Underscore</code> for the simple reason that the <code class="language-plaintext highlighter-rouge">Hyphen</code> is a character used in certain words,
-as well as when descibing dates.</p>
+Use `Underscore` for the simple reason that the `Hyphen` is a character used in certain words,
+as well as when descibing dates.
 
-<p><code class="language-plaintext highlighter-rouge">Undersocres</code> because it’s sort of annoying if you make a type and get a file name <code class="language-plaintext highlighter-rouge">super-file</code>
-then try to do a shell command on it. The <code class="language-plaintext highlighter-rouge">-file</code> can get read as an option unless you use quoting.</p>
+`Undersocres` because it's sort of annoying if you make a type and get a file name `super-file`
+then try to do a shell command on it. The `-file` can get read as an option unless you use quoting.
 
-<p>The technical terms for this is <a href="https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html">Shell Expansion</a> 
-and <a href="https://tldp.org/LDP/abs/html/globbingref.html">Globbing</a>.</p>
+The technical terms for this is [Shell Expansion](https://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html) 
+and [Globbing](https://tldp.org/LDP/abs/html/globbingref.html).
 
-<p>Bash itself cannot recognize RegEx, Inside scripts, it is commands and utilities – such as <code class="language-plaintext highlighter-rouge">sed</code> and <code class="language-plaintext highlighter-rouge">awk</code>
-that interpret RegEx’s. Bash essentially tends to glob and expand on elements that are typically used in filenames or in 
-regular expression, in the instance they don’t have encapsulation.</p>
+Bash itself cannot recognize RegEx, Inside scripts, it is commands and utilities -- such as `sed` and `awk`
+that interpret RegEx's. Bash essentially tends to glob and expand on elements that are typically used in filenames or in 
+regular expression, in the instance they don't have encapsulation.
 
-<p>Example: File is named <code class="language-plaintext highlighter-rouge">-rf</code>
+Example: File is named `-rf`
 cd /homedir
 rm -rf 
-(ohshit) You deleted your home directory <code class="language-plaintext highlighter-rouge">;_;</code></p>
+(ohshit) You deleted your home directory `;_;`
 
-<p>vs</p>
+vs
 
-<p>rm ./-rf</p>
+rm ./-rf
 
-<p>(a-ok) You just deleted the <code class="language-plaintext highlighter-rouge">-rf</code> file :-)</p>
-
+(a-ok) You just deleted the `-rf` file :-)
