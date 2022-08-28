@@ -19,3 +19,21 @@ Example:
 `> int[] arr = {-4, 5, 7, -6, 10, -15, 3}`
 
 `> 16 // {5, 7, -6, 10}`
+
+```java
+int MaxSubArrSum(int[] arr) {
+    int best = arr[0];
+    int sum = arr[0];
+
+    for (int i = 0; i < arr.length; i++) {
+        for (int j = i; i < arr.length; j++) {
+            sum = Math.max(arr[j], sum + arr[j]);
+            best = Math.max(best, sum);
+        }
+    }
+    return best;
+}
+```
+Complexity: O(n^2)
+
+
