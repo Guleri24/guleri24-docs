@@ -19,12 +19,20 @@ Frequency of each character in a String
 
 Example:
 
+```cpp
+    // C++
+    string s = "abccccdd";
+    
+    for (char c : s)
+        map[c]++;
 ```
-if (map.find(s[i] == map.end()) {
-    map.insert(make_pair{s[i], 1});
-} else {
-    map[s[i]]++;
-}
+
+```java
+    // Java
+    String s = "abccccdd";
+    
+    for (char c : s.toCharArray())
+        map.merge(c, 1, Integer::sum);        
 ```
 ### C++ naive
 
