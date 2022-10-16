@@ -39,10 +39,10 @@ if (map.find(s[i] == map.end()) {
 
         for (int i = 0; i < s.length(); i++){
             if (map.find(s[i]) == map.end())
-            map.insert(make_pair(s[i], 1);
+                map.insert(make_pair(s[i], 1);
             else
-            map[s[i]]++;
-            }
+                map[s[i]]++;
+        }
 
         // print
         for (auto& it : map) {
