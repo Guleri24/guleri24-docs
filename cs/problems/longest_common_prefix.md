@@ -1,8 +1,10 @@
 ---
 layout: default
 title: Longest Common Prefix
-parent: Algorithms
+parent: Problems
 grand_parent: Computer Science
+has_children: false
+nav_order: 2
 permalink: /cs/algorithms/longest_common_prefix/
 ---
 Date: 28 Aug 2022
