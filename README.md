@@ -4,6 +4,8 @@
 
  ## Last Updates:
  
+ C/C++ -> In-built sort in C++ : IntroSort on 22 Oct 2022
+
  C/C++ -> Structure Malloc: Make use of void declared memory on 21 Oct 2022
        -> Basic Memory De/Allocation 
  CS -> Problems -> Frequency Map on 16 Oct 2022
