@@ -8,7 +8,7 @@ Date: 21 Oct 2022
 
 # Basic Memory De/Allocation
 
-```C
+```c
     #include <stdio.h>
     #include <stdlib.h>
     

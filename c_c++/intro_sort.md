@@ -36,6 +36,8 @@ Since Quicksort is also not stable so Introsort is also not stable.
     Average Case - O(N log N)
     Worse Case - O(N log N) where, N = number of elements to be sorted.
 Auxiliary Space Just like quicksort, it may use O(log N) auxiliary recursion stack space.
+
+
 ```cpp
 
     #include <bits/stdc++.h>

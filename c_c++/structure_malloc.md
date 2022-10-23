@@ -8,7 +8,7 @@ Date: 21 Oct 2022
 
 # Structure Malloc: Make use of void declared memory
 
-```C
+```c
     #include <stdio.h>
     #include <stdlib.h>
     #include <strings.h>
