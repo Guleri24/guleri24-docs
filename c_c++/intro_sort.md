@@ -7,7 +7,35 @@ nav_order: 3
 Date: 21 Oct 2022
 
 # In-built sort in C++ : IntroSort
+It's a hybrid sorting algorithm, which means that it uses more than one sorting algorithms as
+routine.
+Uses three sorting algorithm to minimise the running time:
+    Quick Sort
+    Heap Sort
+    Insertion Sort
 
+## How does it work?
+Introsort begins with quicksort and if the recursion depth goes more than a particular
+limit it switches to Heapsort to avoid Quicksort’s worse case O(N^2) time complexity.
+It also uses insertion sort when the number of elements to sort is quite less. So first
+it creates a partition.
+Three cases arises from here.
+1. If the partition size is such that there is a possibility to exceed the maximum depth
+limit then the Introsort switches to Heapsort. We define the maximum depth limit as 2*log(N)
+2. If the partition size is too small then Quicksort decays to Insertion Sort. We define
+this cutoff as 16 (due to research). So if the partition size is less than 16 then we will
+do insertion sort.
+3. If the partition size is under the limit and not too small (i.e - between 16 and 2*log(N)),
+then it performs a simple quicksort.
+
+## Is Introsort stable ?
+Since Quicksort is also not stable so Introsort is also not stable.
+
+## Time Complexity:
+    Best Case – O(N log N)
+    Average Case - O(N log N)
+    Worse Case - O(N log N) where, N = number of elements to be sorted.
+Auxiliary Space Just like quicksort, it may use O(log N) auxiliary recursion stack space.
 ```cpp
 
     #include <bits/stdc++.h>
