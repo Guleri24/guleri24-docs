@@ -4,6 +4,9 @@
 
  ## Last Updates:
  
+ Java -> Questions -> Why doesn't Java support unsigned ints? on 17 Nov 2022
+ NSFW -> Wallpaper added
+
  C/C++ -> In-built sort in C++ : IntroSort on 22 Oct 2022
 
  C/C++ -> Structure Malloc: Make use of void declared memory on 21 Oct 2022
