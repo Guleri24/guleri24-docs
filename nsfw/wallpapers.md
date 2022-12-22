@@ -8,3 +8,5 @@ permalink: /nsfw/wallpapers/
 Date: 17 Nov 2022
 
 ![](wallpapers/moon_shine.png)
+
+![](wallpapers/wavesgw.jpg)
