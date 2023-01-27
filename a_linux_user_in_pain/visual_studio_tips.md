@@ -32,9 +32,13 @@ Lines from Chris Heilmann [ What is the relationship between Visual Studio and V
 3. Search workbench.editor.enablePreview 
 4. disable all of these
 
+![](/images/open_in_new_tab.PNG)
+
 ### Autosave
 1. File 
 2. Preferences 
 3. Setting 
 4. Search auto save 
 5. In the Files: `Auto Save select after delay`
+
+![](/images/autosave.PNG)
