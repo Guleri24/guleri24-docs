@@ -6,7 +6,6 @@
  * A Linux User in Pain -> Visual Studio Tips on 21 Jan 2023
  
  * Java -> Questions -> Why doesn't Java support unsigned ints? on 17 Nov 2022 \
-   NSFW -> Wallpaper added
 
  * C/C++ -> In-built sort in C++ : IntroSort on 22 Oct 2022
 
