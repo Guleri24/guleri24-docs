@@ -3,6 +3,7 @@
  A place where I store whatever I learn and desire to remain with me ;-)
 
  ## Last Updates:
+ * A Linux User in Pain -> Remove the annoying volume popup overlay on 14 Feb 2023
  * A Linux User in Pain -> Visual Studio Tips on 21 Jan 2023
  
  * Java -> Questions -> Why doesn't Java support unsigned ints? on 17 Nov 2022 \
