@@ -15,6 +15,8 @@ Date: 14 Feb 2023
 
 **Firefox** : search `about:config` > search for `media.hardwaremediakey.enabled` > make it `false`
 
+**Spotify** : click on the profile > select `Settings` > search for `Display` > disable `Show desktop overlay when using media keys`  
+
 **Result**
 
 ![](resource/no_overlay_volume.png)
